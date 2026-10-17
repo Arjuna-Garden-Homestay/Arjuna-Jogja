@@ -1739,4 +1739,54 @@ ul.address {
 
 /*Presets*/
 
+/* ===== Book Now (WhatsApp) button ===== */
+.btn-book {
+  display: inline-block;
+  padding: 13px 30px;
+  background-color: #25D366;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 0;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.btn-book:hover,
+.btn-book:focus {
+  background-color: #1ebe5b;
+  color: #fff;
+  text-decoration: none;
+}
+.btn-book .fa,
+.btn-book .fab {
+  margin-right: 8px;
+}
+/* Hero slider variant */
+.caption .btn-book {
+  margin-top: 18px;
+  padding: 14px 34px;
+  font-size: 16px;
+}
+/* Contact section variant */
+.contact-info .btn-book {
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+/* Navigation bar variant */
+.navbar-nav > li > a.btn-book-nav {
+  background-color: #25D366;
+  color: #fff !important;
+  font-weight: 700;
+  margin: 12px 0 12px 8px;
+  padding: 8px 18px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.navbar-nav > li > a.btn-book-nav:hover,
+.navbar-nav > li > a.btn-book-nav:focus {
+  background-color: #1ebe5b;
+  color: #fff !important;
+}
+
 
