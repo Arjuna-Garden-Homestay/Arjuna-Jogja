@@ -1773,6 +1773,11 @@ ul.address {
   margin-top: 18px;
   margin-bottom: 6px;
 }
+/* Tour Guide section CTA — adds breathing room before the image grid */
+.tour-cta {
+  margin-top: 6px;
+  margin-bottom: 50px;
+}
 /* Navigation bar variant */
 .navbar-nav > li > a.btn-book-nav {
   background-color: #25D366;
