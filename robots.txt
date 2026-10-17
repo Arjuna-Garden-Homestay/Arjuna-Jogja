@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /sendemail.php
+
+Sitemap: https://arjuna-garden-homestay.github.io/Arjuna-Jogja/sitemap.xml

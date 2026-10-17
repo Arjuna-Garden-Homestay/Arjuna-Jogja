@@ -124,18 +124,29 @@ jQuery(function($) {
 		$("#portfolio-single").slideUp(500);
 	});
 
-	// Contact form
+	// Contact form (Formspree)
 	var form = $('#main-contact-form');
 	form.submit(function(event){
 		event.preventDefault();
 		var form_status = $('<div class="form_status"></div>');
 		$.ajax({
 			url: $(this).attr('action'),
+			method: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json',
+			headers: { 'Accept': 'application/json' },
 			beforeSend: function(){
-				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
+				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Sending your message...</p>').fadeIn() );
 			}
-		}).done(function(data){
-			form_status.html('<p class="text-success">Thank you for contact us. As early as possible  we will contact you</p>').delay(3000).fadeOut();
+		}).done(function(){
+			form[0].reset();
+			form_status.html('<p class="text-success"><i class="fa fa-check"></i> Thank you! Your message has been sent. We will get back to you as soon as possible.</p>');
+		}).fail(function(xhr){
+			var msg = 'Sorry, something went wrong. Please email us directly at Arjuna.Garden.Homestay@proton.me';
+			if (xhr.responseJSON && xhr.responseJSON.errors && xhr.responseJSON.errors.length) {
+				msg = xhr.responseJSON.errors.map(function(e){ return e.message; }).join(' ');
+			}
+			form_status.html('<p class="text-danger">' + msg + '</p>');
 		});
 	});
 
