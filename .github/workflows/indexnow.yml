@@ -14,7 +14,7 @@ jobs:
 
       - name: Submit URL to IndexNow (Bing / Yandex / others)
         run: |
-          curl -s -X POST "https://api.indexnow.org/indexnow" \
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
             -d '{
               "host": "arjuna-garden-homestay.github.io",
@@ -23,6 +23,13 @@ jobs:
               "urlList": [
                 "https://arjuna-garden-homestay.github.io/Arjuna-Jogja/"
               ]
-            }'
-          echo ""
-          echo "IndexNow ping sent."
+            }')
+          echo "IndexNow response: $STATUS"
+          case "$STATUS" in
+            200|202) echo "✓ Accepted by IndexNow." ;;
+            400) echo "✗ 400 — malformed request."; exit 1 ;;
+            403) echo "✗ 403 — key not accessible or mismatch."; exit 1 ;;
+            422) echo "✗ 422 — URL not under host, or keyLocation unreachable."; exit 1 ;;
+            429) echo "✗ 429 — too many requests (rate-limited)."; exit 1 ;;
+            *)    echo "✗ Unexpected response $STATUS"; exit 1 ;;
+          esac
