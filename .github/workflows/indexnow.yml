@@ -1,0 +1,28 @@
+name: Ping IndexNow
+
+on:
+  push:
+    branches:
+      - gh-pages
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for GitHub Pages deployment to finish
+        run: sleep 75
+
+      - name: Submit URL to IndexNow (Bing / Yandex / others)
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "arjuna-garden-homestay.github.io",
+              "key": "12ebc491873045399a20efc023a73a2f",
+              "keyLocation": "https://arjuna-garden-homestay.github.io/Arjuna-Jogja/12ebc491873045399a20efc023a73a2f.txt",
+              "urlList": [
+                "https://arjuna-garden-homestay.github.io/Arjuna-Jogja/"
+              ]
+            }'
+          echo ""
+          echo "IndexNow ping sent."
